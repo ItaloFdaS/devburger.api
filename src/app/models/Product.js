@@ -1,12 +1,13 @@
 import Sequelize, { Model } from "sequelize";
 
+import Category from "./Category.js";
+
 class Product extends Model {
   static init(sequelize) {
     super.init(
       {
         name: Sequelize.STRING,
         price: Sequelize.INTEGER,
-        category_id: Sequelize.INTEGER,
         path: Sequelize.STRING,
         url: {
           type: Sequelize.VIRTUAL,
@@ -19,6 +20,15 @@ class Product extends Model {
         sequelize,
       }
     );
+
+    return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Category, {
+      foreignKey: "category_id",
+      as: "category",
+    });
   }
 }
 
