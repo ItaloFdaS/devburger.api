@@ -36,7 +36,7 @@ class UserController {
     });
 
     if (emailExists) {
-      return response.status(409).json({
+      return response.status(400).json({
         error: "Email already exists",
       });
     }
